@@ -1,4 +1,4 @@
-const usersData = [
+let usersData = [
   {
     id: 1,
     name: 'Leanne Graham',
@@ -181,7 +181,11 @@ const usersData = [
 // Create a function to print user full address
 // suite - street, city, zipcode
 
-const printUserAddress = (user) => {};
+const printUserAddress = (user) => {
+  const { suite, street, city, zipcode } = user.address;
+  const suiteString = suite ? `${suite} - ` : '';
+  return `${suiteString}${street}, ${city}, ${zipcode}`;
+};
 
 console.log(printUserAddress(usersData[1]));
 console.log(printUserAddress(usersData[4]));
@@ -190,18 +194,29 @@ console.log(printUserAddress(usersData[6]));
 // Create a function to separate first name and last name for all users and return a new array of users
 // {firstName: "", lastName: ""}
 
-const setFirstLastName = (users) => {};
+const setFirstLastName = (users) => {
+  return users.map(u => ({
+    ...u,
+    firstName: u.name.split(' ').shift(),
+    lastName: u.name.split(' ').pop(),
+  }))
+};
 
 usersData = [...setFirstLastName(usersData)];
 // Create a function to get user by id and print object with user first and last name
-const getUserById = (userId, users) => {};
+const getUserById = (userId, users) => {
+  return users.find(u => u.id === userId);
+};
 
 console.log(getUserById(5, usersData));
 console.log(getUserById(8, usersData));
 
 // Create a function to delete user by id and print message to inform which user id deleted
 
-const deleteUser = (userId, users) => {};
+const deleteUser = (userId, users) => {
+  users = users.filter(u => u.id !== userId);
+  return userId;
+};
 
 console.log(deleteUser(4, usersData));
 
@@ -227,13 +242,27 @@ const newUser = [
   ['website', 'conrad.com'],
 ];
 
-const createUser = (userData) => {};
+const createUser = (userData) => {
+  const largestId = usersData.reduce((largest, user) => user.id > largest ? user.id : largest, 0);
+  const newId = largestId + 1;
+  const user = { id: newId }
+  
+  userData.forEach(([key, value]) => user[key] = value);
+
+  console.log(`New user id: ${newId}`);
+  return [...usersData, user];
+};
 
 usersData = [...createUser(newUser)];
 
 // Create a function to update user by id and print updated user
 
-const updateUser = (userId, updateInfo) => {};
+const updateUser = (userId, updateInfo) => {
+  const [key, value] = updateInfo;
+  const updated = getUserById(userId, usersData);
+  updated[key] = value;
+  return updated;
+};
 
 console.log(updateUser(1, ['phone', '1-007-637-3180']));
 console.log(updateUser(3, ['email', 'clementine@yesenia.net']));
