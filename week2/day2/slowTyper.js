@@ -1,7 +1,7 @@
 // slow type some messages //
 // we want to make the program type info out, but in a very slow way...
 
-const str = 'Hello World\n';
+const str = 'Hello World ';
 
 //setTimeout
 // for (let i in str) {
@@ -16,7 +16,7 @@ setInterval(() => {
   if (i > str.length - 1) {
     clearInterval();
   } else {
-    process.stdout.write(i.toString());
+    process.stdout.write(str[i]);
     i++;
   }
 }, 300);

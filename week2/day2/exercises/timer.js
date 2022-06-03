@@ -1,6 +1,7 @@
 /*
 Instruction
-Implement an alarm clock / timer which will beep after a specified amount of time has passed. The user can specify an unlimited number of alarms using command line arguments
+Implement an alarm clock / timer which will beep after a specified amount of time has passed. 
+The user can specify an unlimited number of alarms using command line arguments
 
 PS: to access the arguments, use "process.argv". Console log this to try it out!
 
@@ -28,3 +29,12 @@ An input is a negative number: Ignore/skip any numbers that are negative. We can
 An input is not a number: Ignore/skip these as well, instead of attempting to call setTimeout with a non-number.
 
 */
+
+const args = process.argv.slice(1, process.argv.length);
+
+args.forEach(arg => {
+  const timer = parseInt(arg);
+  if (timer >= 0) {
+    setTimeout(() => process.stdout.write('beep '), timer * 1000);
+  }
+});
