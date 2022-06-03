@@ -4,6 +4,7 @@
 const str = 'Hello World ';
 
 //setTimeout
+// time is not the execution time, but the delay time.
 // for (let i in str) {
 //   setTimeout(() => {
 //     process.stdout.write(str[i]);
@@ -19,4 +20,6 @@ setInterval(() => {
     process.stdout.write(str[i]);
     i++;
   }
+  process.stdout.write(i);
+  i++;
 }, 300);
